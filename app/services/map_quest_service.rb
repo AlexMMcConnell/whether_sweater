@@ -1,8 +1,8 @@
 class MapQuestService
   def self.get_coords(location)
-    content = conn.get("/geocoding/v1/address?key=#{ENV['map_quest_key']}&location=#{location}")
+    content = conn.get("?key=#{ENV['map_quest_key']}&location=#{location}")
     body = parse_response(content)
-    long_lat = body[:results][:locations][0][:latLng]
+    body[:results][0][:locations][0][:latLng]
   end
 
   def self.parse_response(response)
@@ -10,6 +10,6 @@ class MapQuestService
   end
 
   def self.conn
-    Faraday.new(url: "http://www.mapquestapi.com")
+    Faraday.new(url: "http://www.mapquestapi.com/geocoding/v1/address")
   end
 end
