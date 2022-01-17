@@ -1,6 +1,6 @@
 class OpenWeatherService
-  def self.find_weather(latitude, longitude)
-    content = conn.get("/data/2.5/onecall?appid=#{ENV['open_weather_key']}&lat=#{latitude}&lon=#{longitude}")
+  def self.find_weather(latlng)
+    content = conn.get("/data/2.5/onecall?appid=#{ENV['open_weather_key']}&lat=#{latlng[:lat]}&lon=#{latlng[:lng]}&exclude=minutely,alerts&units=imperial")
     parse_response(content)
   end
 
