@@ -12,7 +12,7 @@ class BookFacade
       total_books: book_response[:number_found],
       books: book_response[:books],
       weather: weather,
-      quantity: quantity
+      quantity: quantity.to_i
     }
   end
 end

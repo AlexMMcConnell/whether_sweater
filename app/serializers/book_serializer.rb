@@ -11,7 +11,7 @@ class BookSerializer
             "temperature": book_facade[:weather][:temperature]
           },
           "total_books_found": book_facade[:total_books],
-          "books": book_facade[:books].first(book_facade[:quantity].to_i).map do |book|
+          "books": book_facade[:books].first(book_facade[:quantity]).map do |book|
             {
               "isbn": book[:isbn],
               "title": book[:title],
