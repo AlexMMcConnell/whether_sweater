@@ -1,8 +1,11 @@
 class OpenLibraryService
   def self.find_books(area)
     content = conn.get("?q=#{area}")
-    binding.pry
-    
+    body = parse_response(content)
+    {
+    number_found: body[:numFound],
+    books: body[:docs]
+    }
   end
 
   def self.parse_response(response)
@@ -10,6 +13,6 @@ class OpenLibraryService
   end
 
   def self.conn
-    Faraday.new(url: "http:/openlibrary.org/search.json")
+    Faraday.new(url: "http://openlibrary.org/search.json")
   end
 end
