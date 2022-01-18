@@ -9,21 +9,19 @@ describe 'books_index' do
     expect(response).to be_successful
 
     book_response = JSON.parse(response.body, symbolize_names: true)[:data]
-
     expect(book_response[:id]).to be nil
     expect(book_response[:type]).to eq "books"
-    expect(book_response[:attributes]).to be_a Hash
 
     attributes = book_response[:attributes]
-
+    expect(attributes).to be_a Hash
     expect(attributes[:destination]).to eq(location)
     expect(attributes[:forecast]).to be_a Hash
     expect(attributes[:forecast][:summary]).to be_a String
     expect(attributes[:forecast][:temperature]).to be_a String
-    expect(attributes[:books]).to be_a Array
-    expect(attributes[:books].length).to eq(quantity)
 
     books = attributes[:books]
+    expect(books).to be_a Array
+    expect(books.length).to eq(quantity)
 
     books.each do |book|
       expect(book[:isbn]).to be_a Array
