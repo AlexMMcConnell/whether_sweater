@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
       resources :sessions, only: [:index]
       resources :road_trips, only: [:index]
+      get "book-search", to: "books#index"
     end
   end
 end
