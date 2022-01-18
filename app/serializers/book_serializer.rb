@@ -1,26 +1,21 @@
 class BookSerializer
-  def self.new(books, weather, quantity)
+  def self.new(book_facade)
     {
       "data": {
         "id": nil,
         "type": "books",
         "attributes": {
-          "destination": weather[:city],
+          "destination": book_facade[:weather][:location],
           "forecast": {
-            "summary": weather[:summary],
-            "temperature": weather[:temperature]
+            "summary": book_facade[:weather][:summary],
+            "temperature": book_facade[:weather][:temperature]
           },
-          "total_books_found": books.count
-          "books": books.first(quantity).map do |book|
+          "total_books_found": book_facade[:book_response][:number_found],
+          "books": book_facade[:book_response][:books].first(book_facade[:quantity].to_i).map do |book|
             {
-              "isbn": [
-                num1,
-                num2
-              ],
+              "isbn": book[:isbn],
               "title": book[:title],
-              "publisher": [
-                publisher
-              ]
+              "publisher": book[:publisher]
             }
           end
         }
