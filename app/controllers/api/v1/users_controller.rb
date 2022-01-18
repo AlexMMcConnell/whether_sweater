@@ -7,10 +7,10 @@ class Api::V1::UsersController < ApplicationController
       render json: UserSerializer.new(User.find(user[:id])), status: 201
     elsif response[:password] != response[:password_confirmation]
       render json: "Passwords do not match", status: 400
-    elsif response[:email].nil?
+    elsif new_user[:email].nil?
       render json: "Email required to register", status: 400
     else
-      render json: "User already exists", status: 409
+      render json: "Email already registered", status: 409
     end
   end
 end
