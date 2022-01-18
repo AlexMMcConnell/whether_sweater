@@ -1,6 +1,6 @@
 class BookFacade
   def self.new(location, quantity)
-    books = OpenLibraryService.find_books(location)
+    book_response = OpenLibraryService.find_books(location)
     current_weather = OpenWeatherService.find_weather(MapQuestService.get_coords(location))[:current]
     weather = {
       location: location,
@@ -9,7 +9,8 @@ class BookFacade
     }
 
     {
-      book_response: books,
+      total_books: book_response[:number_found],
+      books: book_response[:books],
       weather: weather,
       quantity: quantity
     }
