@@ -1,7 +1,7 @@
 class RoadTripFacade
   def self.new(origin, destination)
     time = MapQuestService.get_route_time(origin, destination)
-    weather = ForecastFacade.find(destination)
+    weather = ForecastFacade.new(destination)
     if time
       temperature = weather[:hourly][time[0..1].to_i][:temp]
       conditions = weather[:hourly][time[0..1].to_i][:weather][0][:description]
