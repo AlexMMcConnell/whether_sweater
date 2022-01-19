@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :backgrounds, only: [:index]
       resources :users, only: [:index]
       resources :sessions, only: [:index]
-      resources :road_trips, only: [:index]
+      post :road_trips, to: "road_trips#index"
     end
   end
 end
