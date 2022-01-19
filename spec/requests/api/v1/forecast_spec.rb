@@ -17,7 +17,7 @@ describe 'forecast_index' do
     expect(result_forecast[:attributes]).to be_a Hash
 
     expect(current_weather).to be_a Hash
-    expect(daily_weather).to be_a Hash
+    expect(daily_weather).to be_a Array
     expect(hourly_weather).to be_a Array
 
     expect(current_weather[:datetime].to_time).to be_a Time
@@ -31,13 +31,15 @@ describe 'forecast_index' do
     expect(current_weather[:conditions]).to be_a String
     expect(current_weather[:icon]).to be_a String
 
-    expect(daily_weather[:date].to_date).to be_a Date
-    expect(daily_weather[:sunrise].to_time).to be_a Time
-    expect(daily_weather[:sunset].to_time).to be_a Time
-    expect(daily_weather[:max_temp]).to be_a Float
-    expect(daily_weather[:min_temp]).to be_a Float
-    expect(daily_weather[:conditions]).to be_a String
-    expect(daily_weather[:icon]).to be_a String
+    daily_weather.each do |d|
+      expect(d[:date].to_date).to be_a Date
+      expect(d[:sunrise].to_time).to be_a Time
+      expect(d[:sunset].to_time).to be_a Time
+      expect(d[:max_temp]).to be_a Float
+      expect(d[:min_temp]).to be_a Float
+      expect(d[:conditions]).to be_a String
+      expect(d[:icon]).to be_a String
+    end
 
     hourly_weather.each do |h|
       expect(h[:time].to_time).to be_a Time
@@ -67,21 +69,23 @@ describe 'forecast_index' do
     expect(current_weather[:wind_gust]).to be_nil
     expect(current_weather[:weather]).to be_nil
 
-    expect(daily_weather[:moonrise]).to be_nil
-    expect(daily_weather[:moonset]).to be_nil
-    expect(daily_weather[:moon_phase]).to be_nil
-    expect(daily_weather[:temp]).to be_nil
-    expect(daily_weather[:feels_like]).to be_nil
-    expect(daily_weather[:pressure]).to be_nil
-    expect(daily_weather[:humidity]).to be_nil
-    expect(daily_weather[:dew_point]).to be_nil
-    expect(daily_weather[:wind_speed]).to be_nil
-    expect(daily_weather[:wind_deg]).to be_nil
-    expect(daily_weather[:wind_gust]).to be_nil
-    expect(daily_weather[:weather]).to be_nil
-    expect(daily_weather[:clouds]).to be_nil
-    expect(daily_weather[:pop]).to be_nil
-    expect(daily_weather[:uvi]).to be_nil
+    daily_weather.each do |d|
+      expect(d[:moonrise]).to be_nil
+      expect(d[:moonset]).to be_nil
+      expect(d[:moon_phase]).to be_nil
+      expect(d[:temp]).to be_nil
+      expect(d[:feels_like]).to be_nil
+      expect(d[:pressure]).to be_nil
+      expect(d[:humidity]).to be_nil
+      expect(d[:dew_point]).to be_nil
+      expect(d[:wind_speed]).to be_nil
+      expect(d[:wind_deg]).to be_nil
+      expect(d[:wind_gust]).to be_nil
+      expect(d[:weather]).to be_nil
+      expect(d[:clouds]).to be_nil
+      expect(d[:pop]).to be_nil
+      expect(d[:uvi]).to be_nil
+    end
 
     hourly_weather.each do |h|
       expect(h[:dt]).to be_nil
