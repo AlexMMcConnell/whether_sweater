@@ -1,7 +1,7 @@
 class BackgroundsFacade
   def self.new(location)
     given_image = PexelsService.get_image(location)
-    image = {
+    {
       location: location,
       url: given_image[:url],
       source: 'pexels.com',

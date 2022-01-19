@@ -1,4 +1,4 @@
-def BackgroundsSerializer
+class BackgroundsSerializer
   def self.new(image)
     {
       "data": {
