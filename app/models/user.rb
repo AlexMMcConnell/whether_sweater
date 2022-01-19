@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-  validates :email, uniqueness: {scope: :email}
-  validates_presence_of :password
+  validates :email, uniqueness: true
+  validates_presence_of :password, :email
 end
